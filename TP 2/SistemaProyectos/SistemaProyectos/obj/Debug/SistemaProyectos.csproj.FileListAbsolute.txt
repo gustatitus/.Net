@@ -1,0 +1,10 @@
+c:\users\esteban\documents\visual studio 2013\Projects\SistemaProyectos\SistemaProyectos\bin\Debug\SistemaProyectos.exe.config
+c:\users\esteban\documents\visual studio 2013\Projects\SistemaProyectos\SistemaProyectos\bin\Debug\SistemaProyectos.exe
+c:\users\esteban\documents\visual studio 2013\Projects\SistemaProyectos\SistemaProyectos\bin\Debug\SistemaProyectos.pdb
+c:\users\esteban\documents\visual studio 2013\Projects\SistemaProyectos\SistemaProyectos\bin\Debug\EntityFramework.dll
+c:\users\esteban\documents\visual studio 2013\Projects\SistemaProyectos\SistemaProyectos\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\esteban\documents\visual studio 2013\Projects\SistemaProyectos\SistemaProyectos\bin\Debug\EntityFramework.xml
+c:\users\esteban\documents\visual studio 2013\Projects\SistemaProyectos\SistemaProyectos\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\esteban\documents\visual studio 2013\Projects\SistemaProyectos\SistemaProyectos\obj\Debug\SistemaProyectos.csprojResolveAssemblyReference.cache
+c:\users\esteban\documents\visual studio 2013\Projects\SistemaProyectos\SistemaProyectos\obj\Debug\SistemaProyectos.exe
+c:\users\esteban\documents\visual studio 2013\Projects\SistemaProyectos\SistemaProyectos\obj\Debug\SistemaProyectos.pdb

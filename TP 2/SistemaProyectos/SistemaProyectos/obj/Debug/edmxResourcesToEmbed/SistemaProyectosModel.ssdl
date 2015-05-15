@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="UsuarioSet" EntityType="Model1.Store.UsuarioSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SistemaSet" EntityType="Model1.Store.SistemaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProyectoSet" EntityType="Model1.Store.ProyectoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FactoresSet" EntityType="Model1.Store.FactoresSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="SistemaUsuario" Association="Model1.Store.SistemaUsuario">
+      <End Role="Sistema" EntitySet="SistemaSet" />
+      <End Role="Usuario" EntitySet="UsuarioSet" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioProyecto" Association="Model1.Store.UsuarioProyecto">
+      <End Role="Usuario" EntitySet="UsuarioSet" />
+      <End Role="Proyecto" EntitySet="ProyectoSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProyectoFactores" Association="Model1.Store.ProyectoFactores">
+      <End Role="Proyecto" EntitySet="ProyectoSet" />
+      <End Role="Factores" EntitySet="FactoresSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UsuarioSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Dni" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Contraseña" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Sistema_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SistemaSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreError" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ValorDemora" Type="int" Nullable="false" />
+    <Property Name="ValorPosible" Type="int" Nullable="false" />
+    <Property Name="CalculoCategoria" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProyectoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gerente" Type="int" Nullable="false" />
+    <Property Name="Usuario_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FactoresSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Valores" Type="int" Nullable="false" />
+    <Property Name="Proyecto_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="SistemaUsuario">
+    <End Role="Sistema" Type="Model1.Store.SistemaSet" Multiplicity="1" />
+    <End Role="Usuario" Type="Model1.Store.UsuarioSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sistema">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Sistema_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsuarioProyecto">
+    <End Role="Usuario" Type="Model1.Store.UsuarioSet" Multiplicity="1" />
+    <End Role="Proyecto" Type="Model1.Store.ProyectoSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Proyecto">
+        <PropertyRef Name="Usuario_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProyectoFactores">
+    <End Role="Proyecto" Type="Model1.Store.ProyectoSet" Multiplicity="1" />
+    <End Role="Factores" Type="Model1.Store.FactoresSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proyecto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Factores">
+        <PropertyRef Name="Proyecto_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

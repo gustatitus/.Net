@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="UsuarioSet" EntityType="Model1.Usuario" />
+    <EntitySet Name="SistemaSet" EntityType="Model1.Sistema" />
+    <EntitySet Name="ProyectoSet" EntityType="Model1.Proyecto" />
+    <EntitySet Name="FactoresSet" EntityType="Model1.Factores" />
+    <AssociationSet Name="SistemaUsuario" Association="Model1.SistemaUsuario">
+      <End Role="Sistema" EntitySet="SistemaSet" />
+      <End Role="Usuario" EntitySet="UsuarioSet" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioProyecto" Association="Model1.UsuarioProyecto">
+      <End Role="Usuario" EntitySet="UsuarioSet" />
+      <End Role="Proyecto" EntitySet="ProyectoSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProyectoFactores" Association="Model1.ProyectoFactores">
+      <End Role="Proyecto" EntitySet="ProyectoSet" />
+      <End Role="Factores" EntitySet="FactoresSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" />
+    <Property Name="Apellido" Type="String" Nullable="false" />
+    <Property Name="Dni" Type="String" Nullable="false" />
+    <Property Name="Contraseña" Type="String" Nullable="false" />
+    <NavigationProperty Name="Sistema" Relationship="Model1.SistemaUsuario" FromRole="Usuario" ToRole="Sistema" />
+    <NavigationProperty Name="Proyecto" Relationship="Model1.UsuarioProyecto" FromRole="Usuario" ToRole="Proyecto" />
+  </EntityType>
+  <EntityType Name="Sistema">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreError" Type="String" Nullable="false" />
+    <Property Name="ValorDemora" Type="Int32" Nullable="false" />
+    <Property Name="ValorPosible" Type="Int32" Nullable="false" />
+    <Property Name="CalculoCategoria" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="Model1.SistemaUsuario" FromRole="Sistema" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Proyecto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" />
+    <Property Name="Gerente" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="Model1.UsuarioProyecto" FromRole="Proyecto" ToRole="Usuario" />
+    <NavigationProperty Name="Factores" Relationship="Model1.ProyectoFactores" FromRole="Proyecto" ToRole="Factores" />
+  </EntityType>
+  <EntityType Name="Factores">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" />
+    <Property Name="Valores" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Proyecto" Relationship="Model1.ProyectoFactores" FromRole="Factores" ToRole="Proyecto" />
+  </EntityType>
+  <Association Name="SistemaUsuario">
+    <End Type="Model1.Sistema" Role="Sistema" Multiplicity="1" />
+    <End Type="Model1.Usuario" Role="Usuario" Multiplicity="*" />
+  </Association>
+  <Association Name="UsuarioProyecto">
+    <End Type="Model1.Usuario" Role="Usuario" Multiplicity="1" />
+    <End Type="Model1.Proyecto" Role="Proyecto" Multiplicity="*" />
+  </Association>
+  <Association Name="ProyectoFactores">
+    <End Type="Model1.Proyecto" Role="Proyecto" Multiplicity="1" />
+    <End Type="Model1.Factores" Role="Factores" Multiplicity="*" />
+  </Association>
+</Schema>
